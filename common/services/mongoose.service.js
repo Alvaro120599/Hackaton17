@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+require('dotenv').config();
 let count = 0;
 
 const options = {
@@ -13,7 +14,7 @@ const options = {
 };
 const connectWithRetry = () => {
     console.log('MongoDB connection with retry')
-    mongoose.connect("mongodb+srv://alvaro3882447:A2mCEOGBVNAGOU1G@cluster0.quwpy4k.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0", options).then(()=>{
+    mongoose.connect(process.env.MONGOURI, options).then(()=>{
         console.log('MongoDB is connected')
     }).catch(err=>{
         console.log('MongoDB connection unsuccessful, retry after 5 seconds. ', ++count);
