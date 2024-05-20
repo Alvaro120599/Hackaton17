@@ -1,6 +1,6 @@
 
 const config = require('./common/config/env.config.js');
-
+require('dotenv').config();
 const express = require('express');
 const app = express();
 
@@ -27,6 +27,7 @@ UsersRouter.routesConfig(app);
 CoursesRouter.routesConfig(app);
 
 
-app.listen(config.port, function () {
-    console.log('app listening at port %s', config.port);
-});
+
+const server = app.listen(process.env.PORT, () => console.log(`Estoy escuchando por el puerto ${process.env.PORT}!`));
+server.keepAliveTimeout = 120 * 1000;
+server.headersTimeout = 120 * 1000;
